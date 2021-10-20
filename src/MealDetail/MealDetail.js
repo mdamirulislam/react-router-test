@@ -1,7 +1,8 @@
 
+import Button from '@restart/ui/esm/Button';
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 
 const MealDetail = () => {
     const {id} = useParams();
@@ -12,7 +13,11 @@ const MealDetail = () => {
         fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then(  res => res.json())
       .then(data => setMealDetail(data.meals[0]))
-    },[])
+    },[]);
+    const history = useHistory()
+    const handleLocation = () => {
+         history.push('/meals')
+    }
      return (
         <div>
  <Card>
@@ -23,6 +28,8 @@ const MealDetail = () => {
       {strInstructions}
       </Card.Text>
     </Card.Body>
+  <Button onClick={handleLocation} variant="primary" >Go Back</Button>
+
   </Card>
         </div>
     );

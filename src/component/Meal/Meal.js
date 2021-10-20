@@ -1,10 +1,14 @@
 import React from 'react';
 import './Meal.css'
 import { Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Meal = (props) => {
     const {strMeal, strMealThumb, strInstructions, idMeal} = props.meal;
+    const history = useHistory()
+    const handleLocation = () => {
+         history.push(`/meal/${idMeal}`)
+    }
     return (
         
         <div  className='meal'>
@@ -15,9 +19,9 @@ const Meal = (props) => {
     <Card.Text>
       {strInstructions.slice(0,100)}
     </Card.Text>
-   <Link  to={`/meal/${idMeal}`}>
-   <Button variant="primary" >Go somewhere</Button>
-   </Link>
+   {/* <Link  to={`/meal/${idMeal}`}> */}
+   <Button variant="primary" onClick={handleLocation} >Go somewhere</Button>
+   {/* </Link> */}
   </Card.Body>
 </Card>
         </div>
